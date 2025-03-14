@@ -1,6 +1,7 @@
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
+import "./Main.css";
 
 function Main({ weather }) {
   return (
@@ -12,9 +13,9 @@ function Main({ weather }) {
         </p>
         <ul className="cards__list">
           {defaultClothingItems
-            .filter((item) => {
-              return item.weather === weather.type;
-            })
+            // .filter((item) => {
+            //   return item.weather === weather.type;
+            // })
             .map((item) => {
               return <ItemCard key={item._id} item={item} />;
             })}
