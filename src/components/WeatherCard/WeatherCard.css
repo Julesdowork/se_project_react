@@ -1,0 +1,27 @@
+.weather-card {
+  position: relative;
+  /* this will ensure the image is able to shrink properly and keep its left side border radius */
+  height: 80px;
+  display: flex;
+  border-radius: 12px; /* same as the image */
+  overflow: hidden;
+}
+
+.weather-card__temp {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  margin: 0;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.weather-card__img {
+  /* image will shrink from the left, keeping the right side anchored */
+  width: 100%;
+  object-fit: cover;
+  object-position: right top;
+}
