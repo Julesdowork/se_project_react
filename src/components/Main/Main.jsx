@@ -5,7 +5,7 @@ import "./Main.css";
 
 function Main({ weather }) {
   return (
-    <main>
+    <main className="content">
       <WeatherCard />
       <section className="cards">
         <p className="cards__text">
