@@ -1,3 +1,49 @@
+export const weatherOptions = [
+  {
+    isDay: true,
+    condition: "clear",
+    link: new URL("../assets/day-images/day_clear.png", import.meta.url).href,
+  },
+  {
+    isDay: true,
+    condition: "cloudy",
+    link: new URL("../assets/day-images/day_cloudy.png", import.meta.url).href,
+  },
+  {
+    isDay: true,
+    condition: "rain",
+    link: new URL("../assets/day-images/day_rain.png", import.meta.url).href,
+  },
+  {
+    isDay: false,
+    condition: "clear",
+    link: new URL("../assets/night-images/night_clear.png", import.meta.url)
+      .href,
+  },
+  {
+    isDay: false,
+    condition: "cloudy",
+    link: new URL("../assets/night-images/night_cloudy.png", import.meta.url)
+      .href,
+  },
+  {
+    isDay: false,
+    condition: "rain",
+    link: new URL("../assets/night-images/night_rain.png", import.meta.url)
+      .href,
+  },
+];
+
+export const defaultWeatherOptions = {
+  day: {
+    link: new URL("../assets/day-images/day_default.png", import.meta.url).href,
+  },
+  night: {
+    link: new URL("../assets/night-images/night_default.png", import.meta.url)
+      .href,
+  },
+};
+
 export const defaultClothingItems = [
   {
     _id: 0,

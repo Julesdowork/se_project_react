@@ -10,7 +10,13 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "cold", temp: { F: 999, C: 999 }, city: "" });
+  const [weatherData, setWeatherData] = useState({
+    type: "cold",
+    temp: { F: 999, C: 999 },
+    city: "",
+    condition: "",
+    isDaytime: true,
+  });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -39,7 +45,10 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header onAddButtonClicked={handleAddGarmentButton} weatherData={weatherData} />
+        <Header
+          onAddButtonClicked={handleAddGarmentButton}
+          weatherData={weatherData}
+        />
         <Main weatherData={weatherData} onCardClicked={handleCardClick} />
         <Footer />
       </div>
