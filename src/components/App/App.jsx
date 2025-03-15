@@ -5,24 +5,31 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
   const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
   };
 
+  const handleCardClick = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
-  }
+  };
 
   return (
     <div className="page">
       <div className="page__content">
         <Header onAddButtonClicked={handleAddGarmentButton} />
-        <Main weather={weatherData} />
+        <Main weather={weatherData} onCardClicked={handleCardClick} />
         <Footer />
       </div>
       <ModalWithForm
@@ -90,6 +97,13 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
+
+      <ItemModal
+        name="preview"
+        activeModal={activeModal}
+        card={selectedCard}
+        onCloseButtonClicked={closeActiveModal}
+      />
     </div>
   );
 }
