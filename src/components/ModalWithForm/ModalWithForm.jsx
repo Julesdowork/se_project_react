@@ -7,7 +7,7 @@ function ModalWithForm({
   buttonText,
   children,
   activeModal,
-  onCloseButtonClicked,
+  onClose,
 }) {
   return (
     <div
@@ -20,7 +20,7 @@ function ModalWithForm({
         <button
           type="button"
           className="modal__close-btn"
-          onClick={onCloseButtonClicked}
+          onClick={onClose}
         >
           <img src={closeIcon} alt="Close icon" />
         </button>

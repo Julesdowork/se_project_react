@@ -1,7 +1,7 @@
 import "./ItemModal.css";
 import closeIconWhite from "../../assets/close-icon-white.png";
 
-function ItemModal({ name, activeModal, card, onCloseButtonClicked }) {
+function ItemModal({ name, activeModal, card, onClose }) {
   return (
     <div
       className={`modal modal_type_${name} ${
@@ -12,7 +12,7 @@ function ItemModal({ name, activeModal, card, onCloseButtonClicked }) {
         <button
           type="button"
           className="modal__close-btn"
-          onClick={onCloseButtonClicked}
+          onClick={onClose}
         >
           <img src={closeIconWhite} alt="Close icon" />
         </button>

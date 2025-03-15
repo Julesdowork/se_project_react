@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -6,9 +6,11 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "cold" });
+  const [weatherData, setWeatherData] = useState({ type: "cold", temp: { F: 999, C: 999 }, city: "" });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -25,11 +27,20 @@ function App() {
     setActiveModal("");
   };
 
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
-        <Header onAddButtonClicked={handleAddGarmentButton} />
-        <Main weather={weatherData} onCardClicked={handleCardClick} />
+        <Header onAddButtonClicked={handleAddGarmentButton} weatherData={weatherData} />
+        <Main weatherData={weatherData} onCardClicked={handleCardClick} />
         <Footer />
       </div>
       <ModalWithForm
@@ -37,7 +48,7 @@ function App() {
         title="New garment"
         buttonText="Add garment"
         activeModal={activeModal}
-        onCloseButtonClicked={closeActiveModal}
+        onClose={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
           Name
@@ -102,7 +113,7 @@ function App() {
         name="preview"
         activeModal={activeModal}
         card={selectedCard}
-        onCloseButtonClicked={closeActiveModal}
+        onClose={closeActiveModal}
       />
     </div>
   );
