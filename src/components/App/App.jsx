@@ -22,16 +22,37 @@ function App() {
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
+    addCloseModalEventListeners();
   };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+    addCloseModalEventListeners();
   };
 
   const closeActiveModal = () => {
     setActiveModal("");
+    document.removeEventListener("keydown", handleEscapePressed);
   };
+
+  const handleEscapePressed = (evt) => {
+    if (evt.key === "Escape") {
+      closeActiveModal();
+    }
+  }
+
+  const addCloseModalEventListeners = () => {
+    document.addEventListener("keydown", handleEscapePressed);
+  }
+
+  document.querySelectorAll(".modal").forEach((modal) => {
+    modal.addEventListener("mousedown", function(evt) {
+      if (evt.target.classList.contains("modal_opened")) {
+        closeActiveModal();
+      }
+    });
+  });
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
