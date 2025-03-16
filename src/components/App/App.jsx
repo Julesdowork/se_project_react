@@ -19,6 +19,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
@@ -40,19 +41,23 @@ function App() {
     if (evt.key === "Escape") {
       closeActiveModal();
     }
-  }
+  };
 
   const addCloseModalEventListeners = () => {
     document.addEventListener("keydown", handleEscapePressed);
-  }
+  };
 
   document.querySelectorAll(".modal").forEach((modal) => {
-    modal.addEventListener("mousedown", function(evt) {
+    modal.addEventListener("mousedown", function (evt) {
       if (evt.target.classList.contains("modal_opened")) {
         closeActiveModal();
       }
     });
   });
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpened(!isMobileMenuOpened);
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -69,6 +74,9 @@ function App() {
         <Header
           onAddButtonClicked={handleAddGarmentButton}
           weatherData={weatherData}
+          onMenuButtonClicked={toggleMobileMenu}
+          isMobileMenuOpened={isMobileMenuOpened}
+          onClose={toggleMobileMenu}
         />
         <Main weatherData={weatherData} onCardClicked={handleCardClick} />
         <Footer />

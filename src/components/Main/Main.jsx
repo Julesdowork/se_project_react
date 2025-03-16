@@ -1,6 +1,7 @@
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
+import shuffleIcon from "../../assets/shuffle-icon.svg";
 import "./Main.css";
 
 function Main({ weatherData, onCardClicked }) {
@@ -13,9 +14,9 @@ function Main({ weatherData, onCardClicked }) {
         </p>
         <ul className="cards__list">
           {defaultClothingItems
-            .filter((item) => {
-              return item.weather === weatherData.type;
-            })
+            // .filter((item) => {
+            //   return item.weather === weatherData.type;
+            // })
             .map((item) => {
               return (
                 <ItemCard
@@ -26,6 +27,14 @@ function Main({ weatherData, onCardClicked }) {
               );
             })}
         </ul>
+        <button className="content__randomize-btn">
+          <img
+            src={shuffleIcon}
+            alt="Shuffle icon"
+            className="content__shuffle-img"
+          />
+          Randomize
+        </button>
       </section>
     </main>
   );
