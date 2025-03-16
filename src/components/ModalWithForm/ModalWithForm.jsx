@@ -17,14 +17,10 @@ function ModalWithForm({
     >
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
-        <button
-          type="button"
-          className="modal__close-btn"
-          onClick={onClose}
-        >
+        <button type="button" className="modal__close-btn" onClick={onClose}>
           <img src={closeIcon} alt="Close icon" />
         </button>
-        <form action="" className="modal__form">
+        <form name={name} className="modal__form" noValidate>
           {children}
           <button type="submit" className="modal__submit-btn">
             {buttonText}

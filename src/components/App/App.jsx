@@ -7,7 +7,8 @@ import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { coordinates, APIkey } from "../../utils/constants";
+import { coordinates, APIkey, validationConfig } from "../../utils/constants";
+import { enableValidation } from "../../utils/validation";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -59,6 +60,8 @@ function App() {
     setIsMobileMenuOpened(!isMobileMenuOpened);
   };
 
+  enableValidation(validationConfig);
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -88,22 +91,28 @@ function App() {
         activeModal={activeModal}
         onClose={closeActiveModal}
       >
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="garment-name-input" className="modal__label">
           Name
+          <span className="modal__error"></span>
           <input
             type="text"
             className="modal__input"
-            id="name"
+            id="garment-name-input"
             placeholder="Name"
+            required
+            minLength={2}
+            maxLength={40}
           />
         </label>
-        <label htmlFor="imageUrl" className="modal__label">
+        <label htmlFor="garment-imageUrl-input" className="modal__label">
           Image
+          <span className="modal__error"></span>
           <input
             type="url"
             className="modal__input"
-            id="imageUrl"
+            id="garment-imageUrl-input"
             placeholder="Image URL"
+            required
           />
         </label>
         <fieldset className="modal__radio-btns">
