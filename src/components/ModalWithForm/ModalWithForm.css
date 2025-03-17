@@ -58,8 +58,14 @@
 }
 
 .modal__label_type_radio {
+  display: inline;
   margin: 0;
+  color: #00000080;
 }
+
+/* .modal__label_type_radio {
+  color: #000;
+} */
 
 .modal__input {
   display: block;
@@ -101,6 +107,10 @@
   margin-right: 8px;
 }
 
+.modal__radio:checked + .modal__label_type_radio {
+  color: #000;
+}
+
 .modal__submit-btn {
   max-width: 124px;
   padding: 8px 16px;
@@ -114,6 +124,7 @@
   font-size: 16px;
   line-height: 1.25;
   cursor: pointer;
+  transition: opacity 0.25s ease-in;
 }
 
 .modal__submit-btn:hover {
@@ -126,4 +137,14 @@
 
 .modal__error_visible {
   color: #ff4d00;
+}
+
+@media screen and (max-width: 720px) {
+  .modal__content {
+    border-radius: 12px;
+  }
+
+  .modal__submit-btn {
+    max-width: 100%;
+  }
 }

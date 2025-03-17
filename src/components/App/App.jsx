@@ -117,42 +117,52 @@ function App() {
         </label>
         <fieldset className="modal__radio-btns">
           <legend className="modal__legend">Select the weather type:</legend>
-          <label htmlFor="hot" className="modal__label modal__label_type_radio">
+          <div className="modal__radio-group">
             <input
               type="radio"
               className="modal__radio"
-              id="hot"
+              id="radio-hot"
               name="weather"
               value="hot"
             />
-            Hot
-          </label>
-          <label
-            htmlFor="warm"
-            className="modal__label modal__label_type_radio"
-          >
+            <label
+              htmlFor="radio-hot"
+              className="modal__label modal__label_type_radio"
+            >
+              Hot
+            </label>
+          </div>
+          <div className="modal__radio-group">
             <input
               type="radio"
               className="modal__radio"
-              id="warm"
+              id="radio-warm"
               name="weather"
               value="warm"
+              defaultChecked
             />
-            Warm
-          </label>
-          <label
-            htmlFor="cold"
-            className="modal__label modal__label_type_radio"
-          >
+            <label
+              htmlFor="radio-warm"
+              className="modal__label modal__label_type_radio"
+            >
+              Warm
+            </label>
+          </div>
+          <div className="modal__radio-group">
             <input
               type="radio"
               className="modal__radio"
-              id="cold"
+              id="radio-cold"
               name="weather"
               value="cold"
             />
-            Cold
-          </label>
+            <label
+              htmlFor="radio-cold"
+              className="modal__label modal__label_type_radio"
+            >
+              Cold
+            </label>
+          </div>
         </fieldset>
       </ModalWithForm>
 
