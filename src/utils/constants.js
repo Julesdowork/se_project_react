@@ -15,7 +15,7 @@ export const weatherOptions = [
   },
   {
     isDay: true,
-    condition: "cloudy",
+    condition: "clouds",
     link: new URL("../assets/day-images/day_cloudy.png", import.meta.url).href,
   },
   {
@@ -31,7 +31,7 @@ export const weatherOptions = [
   },
   {
     isDay: false,
-    condition: "cloudy",
+    condition: "clouds",
     link: new URL("../assets/night-images/night_cloudy.png", import.meta.url)
       .href,
   },

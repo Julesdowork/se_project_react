@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { coordinates, APIkey, validationConfig } from "../../utils/constants";
+import { coordinates, APIkey, validationConfig, defaultClothingItems } from "../../utils/constants";
 import { enableValidation } from "../../utils/validation";
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
+  const [defaultClothes, setDefaultClothes] = useState(defaultClothingItems);
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
