@@ -30,7 +30,7 @@
 
 @media screen and (max-width: 720px) {
   .card {
-    width: 164px;
-    height: 164px;
+    width: 100%;
+    height: auto;
   }
 }

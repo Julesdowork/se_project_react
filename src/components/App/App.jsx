@@ -10,10 +10,8 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
   coordinates,
   APIkey,
-  validationConfig,
   defaultClothingItems,
 } from "../../utils/constants";
-import { enableValidation } from "../../utils/validation";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -30,7 +28,6 @@ function App() {
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
-    addCloseModalEventListeners();
     // automatically close the mobile menu when add garment modal is active
     setIsMobileMenuOpened(false);
   };
@@ -38,37 +35,15 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
-    addCloseModalEventListeners();
   };
 
   const closeActiveModal = () => {
     setActiveModal("");
-    document.removeEventListener("keydown", handleEscapePressed);
   };
-
-  const handleEscapePressed = (evt) => {
-    if (evt.key === "Escape") {
-      closeActiveModal();
-    }
-  };
-
-  const addCloseModalEventListeners = () => {
-    document.addEventListener("keydown", handleEscapePressed);
-  };
-
-  document.querySelectorAll(".modal").forEach((modal) => {
-    modal.addEventListener("mousedown", function (evt) {
-      if (evt.target.classList.contains("modal_opened")) {
-        closeActiveModal();
-      }
-    });
-  });
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpened(!isMobileMenuOpened);
   };
-
-  enableValidation(validationConfig);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -96,8 +71,9 @@ function App() {
         name="add-garment"
         title="New garment"
         buttonText="Add garment"
-        activeModal={activeModal}
+        isModalOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
+        hasForm={true}
       >
         <label htmlFor="garment-name-input" className="modal__label">
           Name
@@ -176,9 +152,10 @@ function App() {
 
       <ItemModal
         name="preview"
-        activeModal={activeModal}
+        isModalOpen={activeModal === "preview"}
         card={selectedCard}
         onClose={closeActiveModal}
+        hasForm={false}
       />
     </div>
   );
