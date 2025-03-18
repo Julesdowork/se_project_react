@@ -7,7 +7,12 @@ import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { coordinates, APIkey, validationConfig, defaultClothingItems } from "../../utils/constants";
+import {
+  coordinates,
+  APIkey,
+  validationConfig,
+  defaultClothingItems,
+} from "../../utils/constants";
 import { enableValidation } from "../../utils/validation";
 
 function App() {
@@ -26,6 +31,8 @@ function App() {
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
     addCloseModalEventListeners();
+    // automatically close the mobile menu when add garment modal is active
+    setIsMobileMenuOpened(false);
   };
 
   const handleCardClick = (card) => {

@@ -27,7 +27,7 @@ function Main({ weatherData, onCardClicked }) {
               );
             })}
         </ul>
-        <button className="content__randomize-btn">
+        <button className="content__randomize-btn content__randomize-btn_disabled">
           <img
             src={shuffleIcon}
             alt="Shuffle icon"

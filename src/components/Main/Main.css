@@ -52,4 +52,8 @@
     line-height: 1.25;
     color: #fff;
   }
+
+  .content__randomize-btn_disabled {
+    opacity: 0.3;
+  }
 }
