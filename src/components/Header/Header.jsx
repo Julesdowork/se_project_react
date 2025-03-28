@@ -3,6 +3,7 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import menuIcon from "../../assets/menu-icon.png";
 import closeIcon from "../../assets/close-icon-black.png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({
   onAddButtonClicked,
@@ -36,6 +37,7 @@ function Header({
           isMobileMenuOpened && "header__user-container_open"
         }`}
       >
+        <ToggleSwitch />
         <button type="button" className="header__close-btn" onClick={onClose}>
           <img src={closeIcon} alt="Close icon" />
         </button>
