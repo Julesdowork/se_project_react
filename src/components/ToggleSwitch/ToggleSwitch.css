@@ -6,6 +6,11 @@
   border-radius: 20px;
   cursor: pointer;
   overflow: hidden;
+  transition: border-color 0.25s ease-in;
+}
+
+.toggle-switch:hover {
+  border-color: #000;
 }
 
 .toggle-switch__checkbox {
@@ -41,4 +46,12 @@
 
 .toggle-switch__text_C {
   right: 9px;
+}
+
+.toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
+    color: #fff;
+}
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__text_C {
+    color: #fff;
 }
