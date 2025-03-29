@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -52,9 +53,12 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;   // TODO: delete once mock server is set up
+    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1; // TODO: delete once mock server is set up
     // pass in most recently updated state of clothingItems
-    setClothingItems((prevItems) => [{ name, link: imageUrl, weather, _id: newId }, ...prevItems]);
+    setClothingItems((prevItems) => [
+      { name, link: imageUrl, weather, _id: newId },
+      ...prevItems,
+    ]);
     closeActiveModal();
   };
 
@@ -80,11 +84,20 @@ function App() {
             isMobileMenuOpened={isMobileMenuOpened}
             onClose={toggleMobileMenu}
           />
-          <Main
-            weatherData={weatherData}
-            onCardClicked={handleCardClick}
-            clothingItems={clothingItems}
-          />
+          <Routes>
+            <Route
+              path="/se_project_react"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  onCardClicked={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+            <Route path="/se_project_react/profile" element={<p>PROFILE</p>} />
+          </Routes>
+
           <Footer />
         </div>
         <AddItemModal
