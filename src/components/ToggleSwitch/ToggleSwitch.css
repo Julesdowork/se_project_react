@@ -38,6 +38,11 @@
   font-weight: bold;
   font-size: 14px;
   color: #7e7e7e;
+  transition: color 0.25s ease-in;
+}
+
+.toggle-switch:hover .toggle-switch__text {
+  color: #000;
 }
 
 .toggle-switch__text_F {
@@ -49,9 +54,9 @@
 }
 
 .toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
-    color: #fff;
+  color: #fff;
 }
 
 .toggle-switch__checkbox:checked ~ .toggle-switch__text_C {
-    color: #fff;
+  color: #fff;
 }
