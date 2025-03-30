@@ -96,7 +96,7 @@ function App() {
                 />
               }
             />
-            <Route path="/se_project_react/profile" element={<Profile />} />
+            <Route path="/se_project_react/profile" element={<Profile onCardClicked={handleCardClick} />} />
           </Routes>
 
           <Footer />

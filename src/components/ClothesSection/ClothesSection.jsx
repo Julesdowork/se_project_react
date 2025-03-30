@@ -3,7 +3,7 @@ import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
 
-function ClothesSection() {
+function ClothesSection({ onCardClicked }) {
   return (
     <div className="clothes-section">
       <div>
@@ -16,8 +16,7 @@ function ClothesSection() {
             <ItemCard
               key={item._id}
               item={item}
-              // TODO: pass as prop
-              // onCardClicked={onCardClicked}
+              onCardClicked={onCardClicked}
             />
           );
         })}
