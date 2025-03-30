@@ -7,11 +7,8 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import {
-  coordinates,
-  APIkey,
-  defaultClothingItems,
-} from "../../utils/constants";
+import { coordinates, APIkey } from "../../utils/constants";
+import { getItems } from "../../utils/api";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
 import Profile from "../Profile/Profile";
@@ -27,7 +24,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
 
   const handleAddGarmentButton = () => {
@@ -72,6 +69,14 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch((err) => console.err);
+  }, []);
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTempUnit, handleToggleSwitchChange }}
@@ -96,7 +101,15 @@ function App() {
                 />
               }
             />
-            <Route path="/se_project_react/profile" element={<Profile onCardClicked={handleCardClick} />} />
+            <Route
+              path="/se_project_react/profile"
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  onCardClicked={handleCardClick}
+                />
+              }
+            />
           </Routes>
 
           <Footer />
