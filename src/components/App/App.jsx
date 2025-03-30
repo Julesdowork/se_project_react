@@ -14,6 +14,7 @@ import {
 } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -95,7 +96,7 @@ function App() {
                 />
               }
             />
-            <Route path="/se_project_react/profile" element={<p>PROFILE</p>} />
+            <Route path="/se_project_react/profile" element={<Profile />} />
           </Routes>
 
           <Footer />
