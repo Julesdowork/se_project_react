@@ -22,7 +22,7 @@ function Header({
   return (
     <header className="header">
       <div className="header__site-container">
-        <Link to="/se_project_react">
+        <Link to="/">
           <img src={logo} alt="WTWR logo" className="header__logo" />
         </Link>
         <button
@@ -52,7 +52,7 @@ function Header({
         >
           + Add clothes
         </button>
-        <Link to="/se_project_react/profile" className="header__link">
+        <Link to="/profile" className="header__link">
           <div className="header__user-info">
             <p className="header__username">Terrence Tegegne</p>
             <img

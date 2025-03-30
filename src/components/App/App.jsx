@@ -25,7 +25,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [clothingItems, setClothingItems] = useState([]);
-  const [currentTempUnit, setCurrentTempUnit] = useState("F");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
@@ -47,7 +47,7 @@ function App() {
   };
 
   const handleToggleSwitchChange = () => {
-    setCurrentTempUnit(currentTempUnit === "F" ? "C" : "F");
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
@@ -78,10 +78,13 @@ function App() {
   }, []);
 
   return (
-    <CurrentTemperatureUnitContext.Provider
-      value={{ currentTempUnit, handleToggleSwitchChange }}
-    >
-      <div className="page">
+    <div className="page">
+      <CurrentTemperatureUnitContext.Provider
+        value={{
+          currentTempUnit: currentTemperatureUnit,
+          handleToggleSwitchChange,
+        }}
+      >
         <div className="page__content">
           <Header
             onAddButtonClicked={handleAddGarmentButton}
@@ -92,7 +95,7 @@ function App() {
           />
           <Routes>
             <Route
-              path="/se_project_react"
+              path="/"
               element={
                 <Main
                   weatherData={weatherData}
@@ -102,7 +105,7 @@ function App() {
               }
             />
             <Route
-              path="/se_project_react/profile"
+              path="/profile"
               element={
                 <Profile
                   clothingItems={clothingItems}
@@ -126,8 +129,8 @@ function App() {
           onClose={closeActiveModal}
           hasForm={false}
         />
-      </div>
-    </CurrentTemperatureUnitContext.Provider>
+      </CurrentTemperatureUnitContext.Provider>
+    </div>
   );
 }
 

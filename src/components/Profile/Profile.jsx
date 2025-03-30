@@ -1,13 +1,13 @@
 import "./Profile.css";
 
-import Sidebar from "../Sidebar/Sidebar";
+import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 
 function Profile({ clothingItems, onCardClicked }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <Sidebar />
+        <SideBar />
       </section>
       <section className="profile__clothes-section">
         <ClothesSection
