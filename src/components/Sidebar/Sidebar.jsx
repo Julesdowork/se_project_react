@@ -2,7 +2,7 @@ import "./SideBar.css";
 
 import avatar from "../../assets/avatar.png";
 
-function SideBar() {
+function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__avatar-container">
@@ -19,4 +19,4 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+export default Sidebar;
