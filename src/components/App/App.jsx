@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-
 import "./App.css";
+
+import { coordinates, APIkey } from "../../utils/constants";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import { getItems, deleteItem } from "../../utils/api";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ItemModal from "../ItemModal/ItemModal";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { coordinates, APIkey } from "../../utils/constants";
-import { getItems } from "../../utils/api";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
+import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
 
 function App() {
@@ -54,11 +54,18 @@ function App() {
     const newId = Math.max(...clothingItems.map((item) => item._id)) + 1; // TODO: delete once mock server is set up
     // pass in most recently updated state of clothingItems
     setClothingItems((prevItems) => [
-      { name, link: imageUrl, weather, _id: newId },
+      { name, imageUrl, weather, _id: newId },
       ...prevItems,
     ]);
     closeActiveModal();
   };
+
+  const handleDeleteItem = () => {
+    deleteItem(selectedCard._id);
+    setClothingItems((prevItems) => prevItems.filter((item) => item._id !== selectedCard._id));
+    setSelectedCard({});
+    closeActiveModal();
+  }
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -120,14 +127,15 @@ function App() {
         <AddItemModal
           isModalOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
-          onAddItemModalSubmit={handleAddItemModalSubmit}
+          onAddItem={handleAddItemModalSubmit}
         />
         <ItemModal
           name="preview"
-          isModalOpen={activeModal === "preview"}
-          card={selectedCard}
           onClose={closeActiveModal}
+          isModalOpen={activeModal === "preview"}
           hasForm={false}
+          card={selectedCard}
+          onDeleteItem={handleDeleteItem}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>

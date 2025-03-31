@@ -9,6 +9,8 @@
 
 .modal__footer {
   padding: 20px 32px 32px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal__caption {
@@ -25,6 +27,22 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
+}
+
+.modal__delete-btn {
+  background-color: transparent;
+  border: none;
+  color: #FF4D00;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.modal__delete-btn:hover {
+  color: #ff8855;
 }
 
 @media screen and (max-width: 720px) {

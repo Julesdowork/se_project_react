@@ -6,4 +6,15 @@ function getItems() {
   );
 }
 
-export { getItems };
+function deleteItem(cardId) {
+  return fetch(`${baseUrl}/items/${cardId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+  );
+}
+
+export { getItems, deleteItem };

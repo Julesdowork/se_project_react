@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import "./Modal.css";
+
 import closeIcon from "../../assets/close-icon-gray.svg";
 import closeIconWhite from "../../assets/close-icon-white.png";
 
