@@ -15,3 +15,33 @@
   font-weight: bold;
   font-size: 20px;
 }
+
+.sidebar__user-controls {
+  display: none;
+}
+
+.sidebar__options {
+  margin: 0;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: #00000099;
+}
+
+@media screen and (max-width: 720px) {
+  .sidebar {
+    align-items: start;
+    gap: 20px;
+  }
+
+  .sidebar__username {
+    font-size: 24px;
+  }
+
+  .sidebar__user-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+}

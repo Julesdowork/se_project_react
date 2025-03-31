@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px 0;
+  max-width: 100%;
 }
 
 .clothes-section__controls {
@@ -32,9 +33,19 @@
 }
 
 .clothes-section__list {
-  margin: 16px 0 0;
   padding: 0;
+  margin: 16px 0 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(164px, 325px));
   gap: 20px;
+}
+
+@media screen and (max-width: 720px) {
+  .clothes-section__controls {
+    justify-content: space-between;
+  }
+
+  .clothes-section__list {
+    grid-template-columns: repeat(auto-fit, minmax(164px, 1fr));
+  }
 }

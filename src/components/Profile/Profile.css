@@ -5,3 +5,20 @@
 .profile__sidebar {
   margin-right: 116px;
 }
+
+.profile__clothes-section {
+  flex: 1;
+}
+
+@media screen and (max-width: 720px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__sidebar {
+    border-top: 1px solid #0000004d;
+    border-bottom: 1px solid #0000004d;
+    margin-right: 0;
+    padding: 20px 0;
+  }
+}

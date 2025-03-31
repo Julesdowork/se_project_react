@@ -25,20 +25,20 @@ function Header({
         <Link to="/">
           <img src={logo} alt="WTWR logo" className="header__logo" />
         </Link>
-        <button
-          type="button"
-          className="header__menu-btn header__menu-btn_visible"
-          onClick={onMenuButtonClicked}
-        >
-          <img src={menuIcon} alt="Menu icon" className="header__menu-icon" />
-        </button>
+        <p className="header__date-location">
+          {currentDate}, {weatherData.city}
+        </p>
       </div>
-      <p className="header__date-location">
-        {currentDate}, {weatherData.city}
-      </p>
+      <button
+        type="button"
+        className="header__menu-btn header__menu-btn_visible"
+        onClick={onMenuButtonClicked}
+      >
+        <img src={menuIcon} alt="Menu icon" className="header__menu-icon" />
+      </button>
       <div
         className={`header__user-container ${
-          isMobileMenuOpened && "header__user-container_open"
+          isMobileMenuOpened ? "header__user-container_open" : ""
         }`}
       >
         <ToggleSwitch />

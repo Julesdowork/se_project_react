@@ -52,10 +52,8 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    // const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
     postItem({ name, imageUrl, weather })
       .then((data) => {
-        console.log(data);
         // pass in most recently updated state of clothingItems
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
@@ -69,12 +67,15 @@ function App() {
   };
 
   const handleDeleteItem = () => {
-    deleteItem(selectedCard._id); // TODO: add then-catch block
-    setClothingItems((prevItems) =>
-      prevItems.filter((item) => item._id !== selectedCard._id)
-    );
-    setSelectedCard({});
-    closeActiveModal();
+    deleteItem(selectedCard._id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== selectedCard._id)
+        );
+        setSelectedCard({});
+        closeActiveModal();
+      })
+      .catch(console.err);
   };
 
   useEffect(() => {
