@@ -17,6 +17,14 @@ function getItems() {
   return request("/items").then(checkResponses);
 }
 
+function postItem({ name, imageUrl, weather }) {
+  return request("/items", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({ name, imageUrl, weather }),
+  }).then(checkResponses);
+}
+
 function deleteItem(cardId) {
   return request(`/items/${cardId}`, {
     method: "DELETE",
@@ -24,4 +32,4 @@ function deleteItem(cardId) {
   }).then(checkResponses);
 }
 
-export { getItems, deleteItem };
+export { getItems, postItem, deleteItem };

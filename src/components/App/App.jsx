@@ -4,7 +4,7 @@ import "./App.css";
 
 import { coordinates, APIkey, modals } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { getItems, deleteItem } from "../../utils/api";
+import { getItems, postItem, deleteItem } from "../../utils/api";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -52,22 +52,24 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1; // TODO: delete once mock server is set up
-    // pass in most recently updated state of clothingItems
-    setClothingItems((prevItems) => [
-      { name, imageUrl, weather, _id: newId },
-      ...prevItems,
-    ]);
-    closeActiveModal();
+    // const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
+    postItem({ name, imageUrl, weather })
+      .then((data) => {
+        console.log(data);
+        // pass in most recently updated state of clothingItems
+        setClothingItems((prevItems) => [data, ...prevItems]);
+        closeActiveModal();
+      })
+      .catch(console.err);
   };
 
   const openConfirmationModal = () => {
     closeActiveModal();
     setActiveModal("delete-garment");
-  }
+  };
 
   const handleDeleteItem = () => {
-    deleteItem(selectedCard._id);
+    deleteItem(selectedCard._id); // TODO: add then-catch block
     setClothingItems((prevItems) =>
       prevItems.filter((item) => item._id !== selectedCard._id)
     );
