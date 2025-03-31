@@ -1,20 +1,27 @@
 const baseUrl = "http://localhost:3001";
+const headers = { "Content-Type": "application/json" };
+
+function checkResponses(res) {
+  if (res.ok) {
+    return res.json();
+  }
+
+  Promise.reject(`Error: ${res.status}`);
+}
+
+function request(route, options = { headers: headers }) {
+  return fetch(`${baseUrl}${route}`, options);
+}
 
 function getItems() {
-  return fetch(`${baseUrl}/items`).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-  );
+  return request("/items").then(checkResponses);
 }
 
 function deleteItem(cardId) {
-  return fetch(`${baseUrl}/items/${cardId}`, {
+  return request(`/items/${cardId}`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-  );
+    headers: headers,
+  }).then(checkResponses);
 }
 
 export { getItems, deleteItem };

@@ -4,7 +4,7 @@ import "./Modal.css";
 import closeIcon from "../../assets/close-icon-gray.svg";
 import closeIconWhite from "../../assets/close-icon-white.png";
 
-function Modal({ name, onClose, isModalOpen, hasForm, children }) {
+function Modal({ name, onClose, isModalOpen, hasForm, modalType, children }) {
   useEffect(() => {
     const handleEscPressed = (evt) => {
       if (evt.key === "Escape") {
@@ -27,15 +27,15 @@ function Modal({ name, onClose, isModalOpen, hasForm, children }) {
 
   return (
     <div
-      className={`modal modal_type_${name} ${isModalOpen && "modal_opened"}`}
+      className={`modal modal_type_${name} ${
+        isModalOpen ? "modal_opened" : ""
+      }`}
       onClick={handleOverlay}
     >
-      <div
-        className={`modal__content ${!hasForm && "modal__content_type_image"}`}
-      >
+      <div className={`modal__content ${modalType}`}>
         {children}
         <button type="button" className="modal__close-btn" onClick={onClose}>
-          <img src={hasForm ? closeIcon : closeIconWhite} alt="Close icon" />
+          <img src={modalType === "preview" ? closeIconWhite : closeIcon} alt="Close icon" />
         </button>
       </div>
     </div>

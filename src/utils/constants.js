@@ -7,6 +7,11 @@ export const validationConfig = {
   errorClass: "modal__error_visible",
 };
 
+export const modals = {
+  image: "modal__content_type_image",
+  confirmation: "modal__content_type_confirmation",
+};
+
 export const weatherOptions = [
   {
     isDay: true,

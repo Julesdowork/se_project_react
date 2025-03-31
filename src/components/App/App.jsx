@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import { coordinates, APIkey } from "../../utils/constants";
+import { coordinates, APIkey, modals } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { getItems, deleteItem } from "../../utils/api";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -12,6 +12,7 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -60,12 +61,19 @@ function App() {
     closeActiveModal();
   };
 
+  const openConfirmationModal = () => {
+    closeActiveModal();
+    setActiveModal("delete-garment");
+  }
+
   const handleDeleteItem = () => {
     deleteItem(selectedCard._id);
-    setClothingItems((prevItems) => prevItems.filter((item) => item._id !== selectedCard._id));
+    setClothingItems((prevItems) =>
+      prevItems.filter((item) => item._id !== selectedCard._id)
+    );
     setSelectedCard({});
     closeActiveModal();
-  }
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -134,8 +142,17 @@ function App() {
           onClose={closeActiveModal}
           isModalOpen={activeModal === "preview"}
           hasForm={false}
+          modalType={modals.image}
           card={selectedCard}
-          onDeleteItem={handleDeleteItem}
+          onDeleteItem={openConfirmationModal}
+        />
+        <DeleteConfirmationModal
+          name="delete-garment"
+          onClose={closeActiveModal}
+          isModalOpen={activeModal === "delete-garment"}
+          hasForm={false}
+          modalType={modals.confirmation}
+          onConfirm={handleDeleteItem}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
