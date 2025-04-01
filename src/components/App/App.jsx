@@ -27,6 +27,7 @@ function App() {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
@@ -52,13 +53,17 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    setIsLoading(true);
     postItem({ name, imageUrl, weather })
       .then((data) => {
         // pass in most recently updated state of clothingItems
         setClothingItems((prevItems) => [data, ...prevItems]);
-        closeActiveModal();
       })
-      .catch(console.err);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+        closeActiveModal();
+      });
   };
 
   const openConfirmationModal = () => {
@@ -75,7 +80,7 @@ function App() {
         setSelectedCard({});
         closeActiveModal();
       })
-      .catch(console.err);
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -84,7 +89,7 @@ function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch((err) => console.log(err));
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -92,7 +97,7 @@ function App() {
       .then((data) => {
         setClothingItems(data);
       })
-      .catch((err) => console.err);
+      .catch(console.error);
   }, []);
 
   return (
@@ -128,6 +133,7 @@ function App() {
                 <Profile
                   clothingItems={clothingItems}
                   onCardClicked={handleCardClick}
+                  onAddButtonClicked={handleAddGarmentButton}
                 />
               }
             />
@@ -139,6 +145,7 @@ function App() {
           isModalOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           onAddItem={handleAddItemModalSubmit}
+          isLoading={isLoading}
         />
         <ItemModal
           name="preview"

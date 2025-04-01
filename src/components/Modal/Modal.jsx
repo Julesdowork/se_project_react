@@ -6,6 +6,8 @@ import closeIconWhite from "../../assets/close-icon-white.png";
 
 function Modal({ name, onClose, isModalOpen, hasForm, modalType, children }) {
   useEffect(() => {
+    if (!isModalOpen) return; // stop the effect not to add the listener if there is no active modal
+
     const handleEscPressed = (evt) => {
       if (evt.key === "Escape") {
         onClose();
@@ -17,7 +19,7 @@ function Modal({ name, onClose, isModalOpen, hasForm, modalType, children }) {
     return () => {
       document.removeEventListener("keydown", handleEscPressed);
     };
-  }, [onClose]);
+  }, [onClose, isModalOpen]);
 
   const handleOverlay = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -35,7 +37,10 @@ function Modal({ name, onClose, isModalOpen, hasForm, modalType, children }) {
       <div className={`modal__content ${modalType}`}>
         {children}
         <button type="button" className="modal__close-btn" onClick={onClose}>
-          <img src={modalType === "preview" ? closeIconWhite : closeIcon} alt="Close icon" />
+          <img
+            src={modalType === "preview" ? closeIconWhite : closeIcon}
+            alt="Close icon"
+          />
         </button>
       </div>
     </div>

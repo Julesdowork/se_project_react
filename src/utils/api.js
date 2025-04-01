@@ -10,11 +10,11 @@ function checkResponses(res) {
 }
 
 function request(route, options = { headers: headers }) {
-  return fetch(`${baseUrl}${route}`, options);
+  return fetch(`${baseUrl}${route}`, options).then(checkResponses);
 }
 
 function getItems() {
-  return request("/items").then(checkResponses);
+  return request("/items");
 }
 
 function postItem({ name, imageUrl, weather }) {
@@ -22,14 +22,14 @@ function postItem({ name, imageUrl, weather }) {
     method: "POST",
     headers: headers,
     body: JSON.stringify({ name, imageUrl, weather }),
-  }).then(checkResponses);
+  });
 }
 
 function deleteItem(cardId) {
   return request(`/items/${cardId}`, {
     method: "DELETE",
     headers: headers,
-  }).then(checkResponses);
+  });
 }
 
-export { getItems, postItem, deleteItem };
+export { checkResponses, getItems, postItem, deleteItem };
