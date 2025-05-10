@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import "./AddItemModal.css";
 

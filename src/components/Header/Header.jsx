@@ -8,6 +8,8 @@ import closeIcon from "../../assets/close-icon-black.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({
+  onSignUpButtonClicked,
+  onLoginButtonClicked,
   onAddButtonClicked,
   weatherData,
   onMenuButtonClicked,
@@ -47,21 +49,35 @@ function Header({
         </button>
         <button
           type="button"
-          className="header__add-clothes-btn"
+          className="header__primary-btn"
           onClick={onAddButtonClicked}
         >
           + Add clothes
         </button>
         <Link to="/profile" className="header__link">
           <div className="header__user-info">
-            <p className="header__username">Terrence Tegegne</p>
+            {/* <p className="header__username">Terrence Tegegne</p>
             <img
               src={avatar}
               alt="Terrence Tegegne"
               className="header__avatar"
-            />
+            /> */}
           </div>
         </Link>
+        <button
+          type="button"
+          className="header__primary-btn"
+          onClick={onSignUpButtonClicked}
+        >
+          Sign Up
+        </button>
+        <button
+          type="button"
+          className="header__primary-btn"
+          onClick={onLoginButtonClicked}
+        >
+          Log In
+        </button>
       </div>
     </header>
   );

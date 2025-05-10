@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 
+import "./App.css";
 import { coordinates, APIkey, modals } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { getItems, postItem, deleteItem } from "../../utils/api";
@@ -13,6 +13,8 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -28,6 +30,14 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignUpButton = () => {
+    setActiveModal("register");
+  }
+
+  const handleLogInButton = () => {
+    setActiveModal("login");
+  }
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
@@ -110,6 +120,8 @@ function App() {
       >
         <div className="page__content">
           <Header
+            onSignUpButtonClicked={handleSignUpButton}
+            onLoginButtonClicked={handleLogInButton}
             onAddButtonClicked={handleAddGarmentButton}
             weatherData={weatherData}
             onMenuButtonClicked={toggleMobileMenu}
@@ -163,6 +175,16 @@ function App() {
           hasForm={false}
           modalType={modals.confirmation}
           onConfirm={handleDeleteItem}
+        />
+        <RegisterModal
+          isModalOpen={activeModal === "register"}
+          onClose={closeActiveModal}
+          isLoading={isLoading}
+        />
+        <LoginModal
+          isModalOpen={activeModal === "login"}
+          onClose={closeActiveModal}
+          isLoading={isLoading}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
