@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import "./Header.css";
+import { useContext } from "react";
 
+import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import menuIcon from "../../assets/menu-icon.png";
 import closeIcon from "../../assets/close-icon-black.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Header({
   onSignUpButtonClicked,
@@ -16,6 +18,7 @@ function Header({
   isMobileMenuOpened,
   onClose,
 }) {
+  const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -47,37 +50,50 @@ function Header({
         <button type="button" className="header__close-btn" onClick={onClose}>
           <img src={closeIcon} alt="Close icon" />
         </button>
-        <button
-          type="button"
-          className="header__primary-btn"
-          onClick={onAddButtonClicked}
-        >
-          + Add clothes
-        </button>
-        <Link to="/profile" className="header__link">
-          <div className="header__user-info">
-            <p className="header__username">Terrence Tegegne</p>
-            <img
-              src={avatar}
-              alt="Terrence Tegegne"
-              className="header__avatar"
-            />
+        {currentUser ? (
+          <div className="header__user">
+            <button
+              type="button"
+              className="header__primary-btn"
+              onClick={onAddButtonClicked}
+            >
+              + Add clothes
+            </button>
+            <Link to="/profile" className="header__link">
+              <div className="header__user-info">
+                <p className="header__username">{currentUser.name}</p>
+                {currentUser.avatarUrl ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    className="header__avatar"
+                  />
+                ) : (
+                  <p className="header__avatar header__avatar_default">
+                    {currentUser.name[0].toUpperCase()}
+                  </p>
+                )}
+              </div>
+            </Link>
           </div>
-        </Link>
-        <button
-          type="button"
-          className="header__primary-btn"
-          onClick={onSignUpButtonClicked}
-        >
-          Sign Up
-        </button>
-        <button
-          type="button"
-          className="header__primary-btn"
-          onClick={onLoginButtonClicked}
-        >
-          Log In
-        </button>
+        ) : (
+          <div className="header__no-user">
+            <button
+              type="button"
+              className="header__primary-btn"
+              onClick={onSignUpButtonClicked}
+            >
+              Sign Up
+            </button>
+            <button
+              type="button"
+              className="header__primary-btn"
+              onClick={onLoginButtonClicked}
+            >
+              Log In
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -3,7 +3,12 @@ import { useForm } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal({ isModalOpen, onClose, isLoading }) {
+function RegisterModal({
+  isModalOpen,
+  onClose,
+  isLoading,
+  handleRegistration,
+}) {
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
@@ -13,6 +18,7 @@ function RegisterModal({ isModalOpen, onClose, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleRegistration(values);
   };
 
   useEffect(() => {
@@ -63,7 +69,7 @@ function RegisterModal({ isModalOpen, onClose, isLoading }) {
         />
       </label>
       <label htmlFor="register-name-input" className="modal__label">
-        Name
+        Name*
         <span className="modal__error"></span>
         <input
           type="text"
@@ -78,7 +84,7 @@ function RegisterModal({ isModalOpen, onClose, isLoading }) {
         />
       </label>
       <label htmlFor="register-avatarUrl-input" className="modal__label">
-        Avatar URL
+        Avatar URL*
         <span className="modal__error"></span>
         <input
           type="url"

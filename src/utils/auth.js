@@ -1,6 +1,6 @@
 import { headers, request } from "./api";
 
-function registerUser({ name, avatar, email, password }) {
+export function registerUser(name, avatar, email, password) {
   return request("/signup", {
     method: "POST",
     headers: headers,
@@ -8,7 +8,7 @@ function registerUser({ name, avatar, email, password }) {
   });
 }
 
-function authorizeUser({ email, password }) {
+export function authorizeUser(email, password) {
   return request("/signin", {
     method: "POST",
     headers: headers,
@@ -16,4 +16,13 @@ function authorizeUser({ email, password }) {
   });
 }
 
-export { registerUser, authorizeUser };
+export function checkToken(token) {
+  return request("/users/me", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    }
+  });
+}
