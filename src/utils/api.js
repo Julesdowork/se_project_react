@@ -1,5 +1,5 @@
-const baseUrl = "http://localhost:3001";
-const headers = { "Content-Type": "application/json" };
+export const baseUrl = "http://localhost:3001";
+export const headers = { "Content-Type": "application/json" };
 
 function checkResponses(res) {
   if (res.ok) {
@@ -32,4 +32,4 @@ function deleteItem(cardId) {
   });
 }
 
-export { checkResponses, getItems, postItem, deleteItem };
+export { checkResponses, request, getItems, postItem, deleteItem };

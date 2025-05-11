@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import { coordinates, APIkey, modals } from "../../utils/constants";
@@ -17,6 +17,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [weatherData, setWeatherData] = useState({
     type: "cold",
     temp: { F: 999, C: 999 },
@@ -33,11 +34,11 @@ function App() {
 
   const handleSignUpButton = () => {
     setActiveModal("register");
-  }
+  };
 
   const handleLogInButton = () => {
     setActiveModal("login");
-  }
+  };
 
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
@@ -142,11 +143,15 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  clothingItems={clothingItems}
-                  onCardClicked={handleCardClick}
-                  onAddButtonClicked={handleAddGarmentButton}
-                />
+                isLoggedIn ? (
+                  <Profile
+                    clothingItems={clothingItems}
+                    onCardClicked={handleCardClick}
+                    onAddButtonClicked={handleAddGarmentButton}
+                  />
+                ) : (
+                  <Navigate to="/" replace />
+                )
               }
             />
           </Routes>

@@ -56,12 +56,12 @@ function Header({
         </button>
         <Link to="/profile" className="header__link">
           <div className="header__user-info">
-            {/* <p className="header__username">Terrence Tegegne</p>
+            <p className="header__username">Terrence Tegegne</p>
             <img
               src={avatar}
               alt="Terrence Tegegne"
               className="header__avatar"
-            /> */}
+            />
           </div>
         </Link>
         <button
