@@ -6,6 +6,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function RegisterModal({ isModalOpen, onClose, isLoading }) {
   const { values, handleChange, setValues } = useForm({
     email: "",
+    password: "",
     name: "",
     avatarUrl: "",
   });
@@ -17,6 +18,7 @@ function RegisterModal({ isModalOpen, onClose, isLoading }) {
   useEffect(() => {
     setValues({
       email: "",
+      password: "",
       name: "",
       avatarUrl: "",
     });
@@ -57,6 +59,7 @@ function RegisterModal({ isModalOpen, onClose, isLoading }) {
           placeholder="Password"
           required
           onChange={handleChange}
+          value={values.password}
         />
       </label>
       <label htmlFor="register-name-input" className="modal__label">

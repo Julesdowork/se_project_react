@@ -6,6 +6,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function LoginModal({ isModalOpen, onClose, isLoading }) {
   const { values, handleChange, setValues } = useForm({
     email: "",
+    password: "",
   });
 
   const handleSubmit = (e) => {
@@ -15,6 +16,7 @@ function LoginModal({ isModalOpen, onClose, isLoading }) {
   useEffect(() => {
     setValues({
       email: "",
+      password: "",
     });
   }, [isModalOpen]);
 
@@ -53,6 +55,7 @@ function LoginModal({ isModalOpen, onClose, isLoading }) {
           placeholder="Password"
           required
           onChange={handleChange}
+          value={values.password}
         />
       </label>
     </ModalWithForm>
