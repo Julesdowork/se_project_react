@@ -4,7 +4,7 @@ import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey, modals } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { getItems, postItem, deleteItem } from "../../utils/api";
+import { getItems, postItem, deleteItem, editProfile } from "../../utils/api";
 import * as auth from "../../utils/auth";
 import { getToken, setToken } from "../../utils/token";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -18,6 +18,7 @@ import Profile from "../Profile/Profile";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -83,6 +84,11 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleEditProfileButton = () => {
+    setActiveModal("edit-profile");
+    setIsMobileMenuOpened(false);
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -101,6 +107,19 @@ function App() {
       .then((data) => {
         // pass in most recently updated state of clothingItems
         setClothingItems((prevItems) => [data, ...prevItems]);
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+        closeActiveModal();
+      });
+  };
+
+  const handleEditProfile = ({ name, avatar }) => {
+    setIsLoading(true);
+    editProfile({ name, avatar }, getToken())
+      .then((data) => {
+        setCurrentUser({ ...currentUser, name, avatar });
       })
       .catch(console.error)
       .finally(() => {
@@ -197,6 +216,7 @@ function App() {
                       clothingItems={clothingItems}
                       onCardClicked={handleCardClick}
                       onAddButtonClicked={handleAddGarmentButton}
+                      onEditProfileButtonClicked={handleEditProfileButton}
                     />
                   ) : (
                     <Navigate to="/" replace />
@@ -240,6 +260,12 @@ function App() {
             onClose={closeActiveModal}
             isLoading={isLoading}
             handleLogin={handleLogin}
+          />
+          <EditProfileModal
+            isModalOpen={activeModal === "edit-profile"}
+            onClose={closeActiveModal}
+            isLoading={isLoading}
+            onEditUser={handleEditProfile}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

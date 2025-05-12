@@ -35,4 +35,15 @@ function deleteItem(cardId) {
   });
 }
 
-export { checkResponses, request, getItems, postItem, deleteItem };
+function editProfile({ name, avatar }, token) {
+  return request("/users/me", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
+}
+
+export { checkResponses, request, getItems, postItem, deleteItem, editProfile };
