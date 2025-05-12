@@ -97,7 +97,7 @@ function App() {
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     setIsLoading(true);
-    postItem({ name, imageUrl, weather })
+    postItem({ name, imageUrl, weather }, getToken())
       .then((data) => {
         // pass in most recently updated state of clothingItems
         setClothingItems((prevItems) => [data, ...prevItems]);
@@ -137,7 +137,7 @@ function App() {
       .checkToken(token)
       .then((data) => {
         setIsLoggedIn(true);
-        setCurrentUser(data.user);
+        setCurrentUser(data);
       })
       .catch(console.error);
   }, []);

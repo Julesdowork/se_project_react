@@ -5,9 +5,11 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import shuffleIcon from "../../assets/shuffle-icon.svg";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Main({ weatherData, onCardClicked, clothingItems }) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -18,6 +20,9 @@ function Main({ weatherData, onCardClicked, clothingItems }) {
         </p>
         <ul className="cards__list">
           {clothingItems
+            .filter((item) => {
+              return item.owner === currentUser._id;
+            })
             .filter((item) => {
               return item.weather === weatherData.type;
             })

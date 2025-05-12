@@ -17,10 +17,13 @@ function getItems() {
   return request("/items");
 }
 
-function postItem({ name, imageUrl, weather }) {
+function postItem({ name, imageUrl, weather }, token) {
   return request("/items", {
     method: "POST",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ name, imageUrl, weather }),
   });
 }

@@ -70,7 +70,7 @@ function Header({
                   />
                 ) : (
                   <p className="header__avatar header__avatar_default">
-                    {currentUser.name[0].toUpperCase()}
+                    {currentUser.name && currentUser.name[0].toUpperCase()}
                   </p>
                 )}
               </div>
