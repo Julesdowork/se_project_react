@@ -46,4 +46,33 @@ function editProfile({ name, avatar }, token) {
   });
 }
 
-export { checkResponses, request, getItems, postItem, deleteItem, editProfile };
+function addCardLike(id, token) {
+  return request(`/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function removeCardLike(id, token) {
+  return request(`/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export {
+  checkResponses,
+  request,
+  getItems,
+  postItem,
+  deleteItem,
+  editProfile,
+  addCardLike,
+  removeCardLike,
+};

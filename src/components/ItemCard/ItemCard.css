@@ -10,9 +10,15 @@
   overflow: hidden;
 }
 
-.card__name {
+.card__label {
   position: absolute;
   top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card__name {
   margin: 0;
   padding: 2px 12px;
   border-radius: 4px;
@@ -22,6 +28,20 @@
   font-size: 16px;
   line-height: 1.25;
   color: rgba(0, 0, 0, 0.6);
+}
+
+.card__like-btn {
+  background-image: url("../../assets/like-icon-empty.svg");
+  background-color: transparent;
+  width: 20px;
+  height: 18px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.card__like-btn_liked {
+  background-image: url("../../assets/like-icon.svg");
 }
 
 .card__img {

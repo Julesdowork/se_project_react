@@ -4,7 +4,14 @@ import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { coordinates, APIkey, modals } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { getItems, postItem, deleteItem, editProfile } from "../../utils/api";
+import {
+  getItems,
+  postItem,
+  deleteItem,
+  editProfile,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import * as auth from "../../utils/auth";
 import { getToken, setToken } from "../../utils/token";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -145,6 +152,30 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = getToken();
+
+    !isLiked
+      ? addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.item : item))
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.item : item))
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+  };
+
   useEffect(() => {
     const token = getToken();
 
@@ -205,6 +236,7 @@ function App() {
                     weatherData={weatherData}
                     onCardClicked={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLiked={handleCardLike}
                   />
                 }
               />

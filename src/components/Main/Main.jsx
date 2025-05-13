@@ -7,7 +7,7 @@ import shuffleIcon from "../../assets/shuffle-icon.svg";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Main({ weatherData, onCardClicked, clothingItems }) {
+function Main({ weatherData, onCardClicked, clothingItems, onCardLiked }) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
   const currentUser = useContext(CurrentUserContext);
 
@@ -16,22 +16,20 @@ function Main({ weatherData, onCardClicked, clothingItems }) {
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.temp[currentTempUnit]}&deg; {currentTempUnit} / You may want to wear:
+          Today is {weatherData.temp[currentTempUnit]}&deg; {currentTempUnit} /
+          You may want to wear:
         </p>
         <ul className="cards__list">
           {clothingItems
-            .filter((item) => {
-              return item.owner === currentUser._id;
-            })
-            .filter((item) => {
-              return item.weather === weatherData.type;
-            })
+            .filter((item) => item.owner === currentUser._id)
+            .filter((item) => item.weather === weatherData.type)
             .map((item) => {
               return (
                 <ItemCard
                   key={item._id}
                   item={item}
                   onCardClicked={onCardClicked}
+                  onCardLiked={onCardLiked}
                 />
               );
             })}
