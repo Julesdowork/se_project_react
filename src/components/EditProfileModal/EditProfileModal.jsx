@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useForm } from "../../hooks/useForm";
+import { useFormAndValidation } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -7,10 +7,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 function EditProfileModal({ isModalOpen, onClose, onEditUser, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const { values, handleChange, setValues } = useForm({
-    name: "",
-    avatar: "",
-  });
+  const { values, handleChange, setValues } = useFormAndValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();

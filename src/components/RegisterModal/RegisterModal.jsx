@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useForm } from "../../hooks/useForm";
+import { useFormAndValidation } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -9,12 +9,7 @@ function RegisterModal({
   isLoading,
   handleRegistration,
 }) {
-  const { values, handleChange, setValues } = useForm({
-    email: "",
-    password: "",
-    name: "",
-    avatarUrl: "",
-  });
+  const { values, handleChange, setValues } = useFormAndValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -24,6 +24,10 @@
   margin-bottom: 32px;
 }
 
+.modal__label_type_error {
+  color: #ff4d00;
+}
+
 .modal__label_type_radio {
   display: inline;
   margin: 0;
@@ -99,15 +103,16 @@
   opacity: 0.6;
 }
 
-.modal__submit-btn_disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
+.modal__submit-btn_disabled,
 .modal__submit-btn_disabled:hover {
   opacity: 0.3;
   cursor: not-allowed;
 }
+
+/* .modal__submit-btn_disabled:hover {
+  opacity: 0.3;
+  cursor: not-allowed;
+} */
 
 .modal__link {
   text-decoration: none;

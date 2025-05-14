@@ -55,14 +55,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignUpButton = () => {
-    setActiveModal("register");
-  };
-
-  const handleLogInButton = () => {
-    setActiveModal("login");
-  };
-
   const handleRegistration = ({ email, password, name, avatarUrl }) => {
     auth
       .registerUser(name, avatarUrl, email, password)
@@ -98,6 +90,44 @@ function App() {
     setCurrentUser({});
   };
 
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }, resetForm) => {
+    setIsLoading(true);
+    postItem({ name, imageUrl, weather }, getToken())
+      .then((data) => {
+        // pass in most recently updated state of clothingItems
+        setClothingItems((prevItems) => [data, ...prevItems]);
+        resetForm();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        closeActiveModal();
+      });
+  };
+
+  const handleEditProfile = ({ name, avatar }) => {
+    setIsLoading(true);
+    editProfile({ name, avatar }, getToken())
+      .then((data) => {
+        setCurrentUser({ ...currentUser, name, avatar });
+      })
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+        closeActiveModal();
+      });
+  };
+
+  const handleSignUpButton = () => {
+    setActiveModal("register");
+  };
+
+  const handleLogInButton = () => {
+    setActiveModal("login");
+  };
+
   const handleAddGarmentButton = () => {
     setActiveModal("add-garment");
     // automatically close the mobile menu when add garment modal is active
@@ -124,33 +154,6 @@ function App() {
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
-  };
-
-  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    setIsLoading(true);
-    postItem({ name, imageUrl, weather }, getToken())
-      .then((data) => {
-        // pass in most recently updated state of clothingItems
-        setClothingItems((prevItems) => [data, ...prevItems]);
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-        closeActiveModal();
-      });
-  };
-
-  const handleEditProfile = ({ name, avatar }) => {
-    setIsLoading(true);
-    editProfile({ name, avatar }, getToken())
-      .then((data) => {
-        setCurrentUser({ ...currentUser, name, avatar });
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-        closeActiveModal();
-      });
   };
 
   const openConfirmationModal = () => {

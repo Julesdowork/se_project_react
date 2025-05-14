@@ -1,27 +1,22 @@
 import { useEffect } from "react";
-import { useForm } from "../../hooks/useForm";
+import { useFormAndValidation } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
-  const { values, handleChange, setValues } = useForm({
-    name: "",
-    imageUrl: "",
-    weather: "",
-  });
+  const { values, handleChange, setValues, errors, isValid, resetForm } =
+    useFormAndValidation();
+
+  const resetAddItemForm = () => {
+    resetForm({ name: "", imageUrl: "", weather: "" });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem(values);
+    onAddItem(values, resetAddItemForm);
   };
 
-  useEffect(() => {
-    setValues({
-      name: "",
-      imageUrl: "",
-      weather: "",
-    });
-  }, [isModalOpen]);
+  useEffect(() => setValues({ weather: "hot" }), [setValues]);
 
   return (
     <ModalWithForm
@@ -32,13 +27,27 @@ function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
       title="New garment"
       buttonText={isLoading ? "Adding..." : "Add garment"}
       onSubmit={handleSubmit}
+      formValid={isValid}
     >
-      <label htmlFor="garment-name-input" className="modal__label">
+      <label
+        htmlFor="garment-name-input"
+        className={`modal__label ${
+          errors.name ? "modal__label_type_error" : ""
+        }`}
+      >
         Name
-        <span className="modal__error"></span>
+        <span
+          className={`modal__error ${
+            errors.name ? "modal__error_visible" : ""
+          }`}
+        >
+          &nbsp;{errors.name && `(${errors.name})`}
+        </span>
         <input
           type="text"
-          className="modal__input"
+          className={`modal__input ${
+            errors.name ? "modal__input_type_error" : ""
+          }`}
           id="garment-name-input"
           name="name"
           placeholder="Name"
@@ -49,12 +58,25 @@ function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
           value={values.name}
         />
       </label>
-      <label htmlFor="garment-imageUrl-input" className="modal__label">
+      <label
+        htmlFor="garment-imageUrl-input"
+        className={`modal__label ${
+          errors.imageUrl ? "modal__label_type_error" : ""
+        }`}
+      >
         Image
-        <span className="modal__error"></span>
+        <span
+          className={`modal__error ${
+            errors.imageUrl ? "modal__error_visible" : ""
+          }`}
+        >
+          &nbsp;{errors.imageUrl && `(${errors.imageUrl})`}
+        </span>
         <input
           type="url"
-          className="modal__input"
+          className={`modal__input ${
+            errors.imageUrl ? "modal__input_type_error" : ""
+          }`}
           id="garment-imageUrl-input"
           name="imageUrl"
           placeholder="Image URL"

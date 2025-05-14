@@ -10,6 +10,7 @@ function ModalWithForm({
   title,
   buttonText,
   onSubmit,
+  formValid,
 }) {
   return (
     <Modal
@@ -23,7 +24,13 @@ function ModalWithForm({
       <form name={name} className="modal__form" noValidate onSubmit={onSubmit}>
         {children}
         <div className="modal__submit-area">
-          <button type="submit" className="modal__submit-btn">
+          <button
+            type="submit"
+            className={`modal__submit-btn ${
+              !formValid ? "modal__submit-btn_disabled" : ""
+            }`}
+            disabled={`${!formValid ? "disabled" : ""}`}
+          >
             {buttonText}
           </button>
           <a href="#" className="modal__link">
