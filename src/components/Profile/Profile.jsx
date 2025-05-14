@@ -8,17 +8,23 @@ function Profile({
   onCardClicked,
   onAddButtonClicked,
   onEditProfileButtonClicked,
+  onLogoutButtonClicked,
+  onCardLiked,
 }) {
   return (
-    <div className="profile">
+    <div className="profile content">
       <section className="profile__sidebar">
-        <Sidebar onEditProfileButtonClicked={onEditProfileButtonClicked} />
+        <Sidebar
+          onEditProfileButtonClicked={onEditProfileButtonClicked}
+          onLogoutButtonClicked={onLogoutButtonClicked}
+        />
       </section>
       <section className="profile__clothes-section">
         <ClothesSection
           clothingItems={clothingItems}
           onCardClicked={onCardClicked}
           onAddButtonClicked={onAddButtonClicked}
+          onCardLiked={onCardLiked}
         />
       </section>
     </div>

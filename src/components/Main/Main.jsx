@@ -21,7 +21,6 @@ function Main({ weatherData, onCardClicked, clothingItems, onCardLiked }) {
         </p>
         <ul className="cards__list">
           {clothingItems
-            .filter((item) => item.owner === currentUser._id)
             .filter((item) => item.weather === weatherData.type)
             .map((item) => {
               return (

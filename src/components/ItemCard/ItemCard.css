@@ -44,6 +44,10 @@
   background-image: url("../../assets/like-icon.svg");
 }
 
+.card__like-btn_hidden {
+  display: none;
+}
+
 .card__img {
   width: 100%;
 }

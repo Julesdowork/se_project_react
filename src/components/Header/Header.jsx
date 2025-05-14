@@ -17,6 +17,7 @@ function Header({
   onMenuButtonClicked,
   isMobileMenuOpened,
   onClose,
+  isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
@@ -50,7 +51,7 @@ function Header({
         <button type="button" className="header__close-btn" onClick={onClose}>
           <img src={closeIcon} alt="Close icon" />
         </button>
-        {currentUser ? (
+        {isLoggedIn ? (
           <div className="header__user">
             <button
               type="button"

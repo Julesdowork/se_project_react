@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.content {
+  flex: 1 0 auto; /* fills the remaining space of the page */
+}
+
 .profile__sidebar {
   margin-right: 116px;
 }

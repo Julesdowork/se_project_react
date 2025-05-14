@@ -13,7 +13,7 @@ import {
   removeCardLike,
 } from "../../utils/api";
 import * as auth from "../../utils/auth";
-import { getToken, setToken } from "../../utils/token";
+import { getToken, setToken, removeToken } from "../../utils/token";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Header from "../Header/Header";
@@ -28,6 +28,8 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
+  const navigate = useNavigate();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [weatherData, setWeatherData] = useState({
@@ -78,6 +80,13 @@ function App() {
       })
       .catch(console.error)
       .finally(closeActiveModal);
+  };
+
+  const handleLogout = () => {
+    removeToken();
+    navigate("/");
+    setIsLoggedIn(false);
+    setCurrentUser({});
   };
 
   const handleAddGarmentButton = () => {
@@ -227,6 +236,7 @@ function App() {
               onMenuButtonClicked={toggleMobileMenu}
               isMobileMenuOpened={isMobileMenuOpened}
               onClose={toggleMobileMenu}
+              isLoggedIn={isLoggedIn}
             />
             <Routes>
               <Route
@@ -249,6 +259,8 @@ function App() {
                       onCardClicked={handleCardClick}
                       onAddButtonClicked={handleAddGarmentButton}
                       onEditProfileButtonClicked={handleEditProfileButton}
+                      onLogoutButtonClicked={handleLogout}
+                      onCardLiked={handleCardLike}
                     />
                   ) : (
                     <Navigate to="/" replace />
