@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import "./Modal.css";
 
+import "./Modal.css";
 import closeIcon from "../../assets/close-icon-gray.svg";
 import closeIconWhite from "../../assets/close-icon-white.png";
 
-function Modal({ name, onClose, isModalOpen, hasForm, modalType, children }) {
+function Modal({ name, onClose, isModalOpen, modalType, children }) {
   useEffect(() => {
     if (!isModalOpen) return; // stop the effect not to add the listener if there is no active modal
 

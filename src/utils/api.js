@@ -28,10 +28,13 @@ function postItem({ name, imageUrl, weather }, token) {
   });
 }
 
-function deleteItem(cardId) {
+function deleteItem(cardId, token) {
   return request(`/items/${cardId}`, {
     method: "DELETE",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 }
 

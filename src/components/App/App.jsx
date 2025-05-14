@@ -1,7 +1,11 @@
+// external libraries
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, Route, Routes } from "react-router-dom";
 
+// stylesheets
 import "./App.css";
+
+// utilities
 import { coordinates, APIkey, modals } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
@@ -14,8 +18,12 @@ import {
 } from "../../utils/api";
 import * as auth from "../../utils/auth";
 import { getToken, setToken, removeToken } from "../../utils/token";
+
+// contexts
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+
+// components
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -25,6 +33,7 @@ import Profile from "../Profile/Profile";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
@@ -150,7 +159,7 @@ function App() {
   };
 
   const handleDeleteItem = () => {
-    deleteItem(selectedCard._id)
+    deleteItem(selectedCard._id, getToken())
       .then(() => {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== selectedCard._id)
@@ -253,7 +262,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  isLoggedIn ? (
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
                       clothingItems={clothingItems}
                       onCardClicked={handleCardClick}
@@ -262,9 +271,7 @@ function App() {
                       onLogoutButtonClicked={handleLogout}
                       onCardLiked={handleCardLike}
                     />
-                  ) : (
-                    <Navigate to="/" replace />
-                  )
+                  </ProtectedRoute>
                 }
               />
             </Routes>

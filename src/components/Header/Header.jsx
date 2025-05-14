@@ -3,7 +3,6 @@ import { useContext } from "react";
 
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 import menuIcon from "../../assets/menu-icon.png";
 import closeIcon from "../../assets/close-icon-black.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";

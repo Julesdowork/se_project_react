@@ -1,6 +1,5 @@
-import Modal from "../Modal/Modal";
-
 import "./DeleteConfirmationModal.css";
+import Modal from "../Modal/Modal";
 
 function DeleteConfirmationModal({
   name,
@@ -8,7 +7,7 @@ function DeleteConfirmationModal({
   isModalOpen,
   hasForm,
   modalType,
-  onConfirm
+  onConfirm,
 }) {
   return (
     <Modal
