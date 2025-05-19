@@ -1,12 +1,3 @@
-export const validationConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__submit-btn",
-  inactiveButtonClass: "modal__submit-btn_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
 export const modals = {
   image: "modal__content_type_image",
   confirmation: "modal__content_type_confirmation",
@@ -29,6 +20,21 @@ export const weatherOptions = [
     link: new URL("../assets/day-images/day_rain.png", import.meta.url).href,
   },
   {
+    isDay: true,
+    condition: "thunderstorm",
+    link: new URL("../assets/day-images/day_storm.png", import.meta.url).href,
+  },
+  {
+    isDay: true,
+    condition: "snow",
+    link: new URL("../assets/day-images/day_snow.png", import.meta.url).href,
+  },
+  {
+    isDay: true,
+    condition: "atmosphere",
+    link: new URL("../assets/day-images/day_fog.png", import.meta.url).href,
+  },
+  {
     isDay: false,
     condition: "clear",
     link: new URL("../assets/night-images/night_clear.png", import.meta.url)
@@ -45,6 +51,23 @@ export const weatherOptions = [
     condition: "rain",
     link: new URL("../assets/night-images/night_rain.png", import.meta.url)
       .href,
+  },
+  {
+    isDay: false,
+    condition: "thunderstorm",
+    link: new URL("../assets/night-images/night_storm.png", import.meta.url)
+      .href,
+  },
+  {
+    isDay: false,
+    condition: "snow",
+    link: new URL("../assets/night-images/night_snow.png", import.meta.url)
+      .href,
+  },
+  {
+    isDay: false,
+    condition: "atmosphere",
+    link: new URL("../assets/night-images/night_fog.png", import.meta.url).href,
   },
 ];
 
