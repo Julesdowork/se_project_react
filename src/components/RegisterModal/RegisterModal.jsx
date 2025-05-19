@@ -9,25 +9,35 @@ function RegisterModal({
   isLoading,
   handleRegistration,
 }) {
-  const { values, handleChange, setValues, errors, isValid, resetForm } = useFormAndValidation();
+  const initialFormValues = {
+    email: "",
+    password: "",
+    name: "",
+    avatarUrl: "",
+  };
+
+  const { values, handleChange, setValues, errors, isValid, resetForm } =
+    useFormAndValidation(initialFormValues);
 
   const resetRegistrationForm = () => {
     resetForm({ email: "", password: "", name: "", avatarUrl: "" });
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration(values, resetRegistrationForm);
   };
 
-  // useEffect(() => 
-  //   setValues({
-  //     email: "",
-  //     password: "",
-  //     name: "",
-  //     avatarUrl: "",
-  //   })
-  // , [isModalOpen]);
+  // useEffect(
+  //   () =>
+  //     setValues({
+  //       email: "",
+  //       password: "",
+  //       name: "",
+  //       avatarUrl: "",
+  //     }),
+  //   [isModalOpen]
+  // );
 
   return (
     <ModalWithForm
@@ -40,13 +50,20 @@ function RegisterModal({
       onSubmit={handleSubmit}
       formValid={isValid}
     >
-      <label htmlFor="register-email-input" className={`modal__label ${
+      <label
+        htmlFor="register-email-input"
+        className={`modal__label ${
           errors.email ? "modal__label_type_error" : ""
-        }`}>
+        }`}
+      >
         Email*
-        <span className={`modal__error ${
+        <span
+          className={`modal__error ${
             errors.email ? "modal__error_visible" : ""
-          }`}>&nbsp;{errors.email && `(${errors.email})`}</span>
+          }`}
+        >
+          &nbsp;{errors.email && `(${errors.email})`}
+        </span>
         <input
           type="email"
           className={`modal__input ${
@@ -60,13 +77,20 @@ function RegisterModal({
           value={values.email}
         />
       </label>
-      <label htmlFor="register-password-input" className={`modal__label ${
+      <label
+        htmlFor="register-password-input"
+        className={`modal__label ${
           errors.password ? "modal__label_type_error" : ""
-        }`}>
+        }`}
+      >
         Password*
-        <span className={`modal__error ${
+        <span
+          className={`modal__error ${
             errors.password ? "modal__error_visible" : ""
-          }`}>&nbsp;{errors.password && `(${errors.password})`}</span>
+          }`}
+        >
+          &nbsp;{errors.password && `(${errors.password})`}
+        </span>
         <input
           type="password"
           className={`modal__input ${
@@ -80,13 +104,20 @@ function RegisterModal({
           value={values.password}
         />
       </label>
-      <label htmlFor="register-name-input" className={`modal__label ${
+      <label
+        htmlFor="register-name-input"
+        className={`modal__label ${
           errors.name ? "modal__label_type_error" : ""
-        }`}>
+        }`}
+      >
         Name*
-        <span className={`modal__error ${
+        <span
+          className={`modal__error ${
             errors.name ? "modal__error_visible" : ""
-          }`}>&nbsp;{errors.name && `(${errors.name})`}</span>
+          }`}
+        >
+          &nbsp;{errors.name && `(${errors.name})`}
+        </span>
         <input
           type="text"
           className={`modal__input ${
@@ -101,13 +132,20 @@ function RegisterModal({
           value={values.name}
         />
       </label>
-      <label htmlFor="register-avatarUrl-input" className={`modal__label ${
+      <label
+        htmlFor="register-avatarUrl-input"
+        className={`modal__label ${
           errors.avatarUrl ? "modal__label_type_error" : ""
-        }`}>
+        }`}
+      >
         Avatar URL*
-        <span className={`modal__error ${
+        <span
+          className={`modal__error ${
             errors.avatarUrl ? "modal__error_visible" : ""
-          }`}>&nbsp;{errors.avatarUrl && `(${errors.avatarUrl})`}</span>
+          }`}
+        >
+          &nbsp;{errors.avatarUrl && `(${errors.avatarUrl})`}
+        </span>
         <input
           type="url"
           className={`modal__input ${

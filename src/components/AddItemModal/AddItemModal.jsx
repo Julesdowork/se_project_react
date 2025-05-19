@@ -4,8 +4,10 @@ import { useFormAndValidation } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
+  const initialFormValues = { name: "", imageUrl: "", weather: "" };
+
   const { values, handleChange, setValues, errors, isValid, resetForm } =
-    useFormAndValidation();
+    useFormAndValidation(initialFormValues);
 
   const resetAddItemForm = () => {
     resetForm({ name: "", imageUrl: "", weather: "" });
@@ -16,7 +18,7 @@ function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
     onAddItem(values, resetAddItemForm);
   };
 
-  useEffect(() => setValues({ weather: "hot" }), [isModalOpen]);
+  // useEffect(() => setValues({ weather: "hot" }), [isModalOpen]);
 
   return (
     <ModalWithForm
