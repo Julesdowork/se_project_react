@@ -55,17 +55,18 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleRegistration = ({ email, password, name, avatarUrl }) => {
+  const handleRegistration = ({ email, password, name, avatarUrl }, resetForm) => {
     auth
       .registerUser(name, avatarUrl, email, password)
       .then(() => {
         handleLogin({ email, password });
+        resetForm();
       })
       .catch(console.error)
       .finally(closeActiveModal);
   };
 
-  const handleLogin = ({ email, password }) => {
+  const handleLogin = ({ email, password }, resetForm) => {
     if (!email || !password) {
       return;
     }
@@ -73,10 +74,12 @@ function App() {
     auth
       .authorizeUser(email, password)
       .then((data) => {
+        console.log(data.user);
         if (data.token) {
           setToken(data.token);
           setCurrentUser(data.user);
           setIsLoggedIn(true);
+          resetForm();
         }
       })
       .catch(console.error)

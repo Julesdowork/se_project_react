@@ -16,7 +16,7 @@ function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
     onAddItem(values, resetAddItemForm);
   };
 
-  useEffect(() => setValues({ weather: "hot" }), [setValues]);
+  useEffect(() => setValues({ weather: "hot" }), [isModalOpen]);
 
   return (
     <ModalWithForm

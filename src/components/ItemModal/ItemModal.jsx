@@ -14,7 +14,7 @@ function ItemModal({
   onDeleteItem,
 }) {
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner === currentUser._id;
+  const isOwn = card.owner === currentUser?._id;
 
   return (
     <Modal
