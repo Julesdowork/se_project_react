@@ -45,20 +45,29 @@
 .header__user {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .header__no-user {
   display: flex;
+  gap: 20px;
 }
 
 .header__primary-btn {
   border: none;
+  padding: 0;
   background-color: transparent;
   font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 20px;
   line-height: 1.2;
   cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.25s;
+}
+
+.header__primary-btn:hover {
+  opacity: 0.6;
 }
 
 .header__close-btn {
