@@ -3,9 +3,15 @@ import { useFormAndValidation } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ isModalOpen, onClose, isLoading, handleLogin }) {
+function LoginModal({
+  isModalOpen,
+  onClose,
+  isLoading,
+  handleLogin,
+  setActiveModal,
+}) {
   const initialFormValues = { email: "", password: "" };
-  const { values, handleChange, setValues, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation(initialFormValues);
 
   const resetLoginForm = () => {
@@ -17,9 +23,6 @@ function LoginModal({ isModalOpen, onClose, isLoading, handleLogin }) {
     handleLogin(values, resetLoginForm);
   };
 
-  // useEffect(() => setValues({...values, email: "", password: ""})
-  // , [isModalOpen]);
-
   return (
     <ModalWithForm
       name="login"
@@ -30,6 +33,7 @@ function LoginModal({ isModalOpen, onClose, isLoading, handleLogin }) {
       buttonText={isLoading ? "Logging in..." : "Log in"}
       onSubmit={handleSubmit}
       formValid={isValid}
+      setActiveModal={setActiveModal}
     >
       <label
         htmlFor="login-email-input"

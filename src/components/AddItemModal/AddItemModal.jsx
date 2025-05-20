@@ -6,7 +6,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
   const initialFormValues = { name: "", imageUrl: "", weather: "" };
 
-  const { values, handleChange, setValues, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation(initialFormValues);
 
   const resetAddItemForm = () => {
@@ -17,8 +17,6 @@ function AddItemModal({ isModalOpen, onClose, onAddItem, isLoading }) {
     e.preventDefault();
     onAddItem(values, resetAddItemForm);
   };
-
-  // useEffect(() => setValues({ weather: "hot" }), [isModalOpen]);
 
   return (
     <ModalWithForm

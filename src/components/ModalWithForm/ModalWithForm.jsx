@@ -11,6 +11,7 @@ function ModalWithForm({
   buttonText,
   onSubmit,
   formValid,
+  setActiveModal,
 }) {
   return (
     <Modal
@@ -33,10 +34,24 @@ function ModalWithForm({
           >
             {buttonText}
           </button>
-          <a href="#" className="modal__link">
-            {name === "register" ? "or Log in" : ""}
-            {name === "login" ? "or Register" : ""}
-          </a>
+          {name === "register" && (
+            <button
+              type="button"
+              className="modal__alt-btn"
+              onClick={() => setActiveModal("login")}
+            >
+              or Log in
+            </button>
+          )}
+          {name === "login" && (
+            <button
+              type="button"
+              className="modal__alt-btn"
+              onClick={() => setActiveModal("register")}
+            >
+              or Register
+            </button>
+          )}
         </div>
       </form>
     </Modal>

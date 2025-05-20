@@ -10,7 +10,7 @@ function EditProfileModal({ isModalOpen, onClose, onEditUser, isLoading }) {
     name: "",
     avatar: "",
   };
-  const { values, handleChange, setValues, errors, isValid, resetForm } =
+  const { values, handleChange, setValues, errors, isValid } =
     useFormAndValidation(initialFormValues);
 
   const handleSubmit = (e) => {

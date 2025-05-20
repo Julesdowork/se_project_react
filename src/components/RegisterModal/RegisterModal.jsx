@@ -8,6 +8,7 @@ function RegisterModal({
   onClose,
   isLoading,
   handleRegistration,
+  setActiveModal,
 }) {
   const initialFormValues = {
     email: "",
@@ -16,7 +17,7 @@ function RegisterModal({
     avatarUrl: "",
   };
 
-  const { values, handleChange, setValues, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation(initialFormValues);
 
   const resetRegistrationForm = () => {
@@ -28,17 +29,6 @@ function RegisterModal({
     handleRegistration(values, resetRegistrationForm);
   };
 
-  // useEffect(
-  //   () =>
-  //     setValues({
-  //       email: "",
-  //       password: "",
-  //       name: "",
-  //       avatarUrl: "",
-  //     }),
-  //   [isModalOpen]
-  // );
-
   return (
     <ModalWithForm
       name="register"
@@ -49,6 +39,7 @@ function RegisterModal({
       buttonText={isLoading ? "Registering..." : "Next"}
       onSubmit={handleSubmit}
       formValid={isValid}
+      setActiveModal={setActiveModal}
     >
       <label
         htmlFor="register-email-input"

@@ -312,12 +312,14 @@ function App() {
             onClose={closeActiveModal}
             isLoading={isLoading}
             handleRegistration={handleRegistration}
+            setActiveModal={setActiveModal}
           />
           <LoginModal
             isModalOpen={activeModal === "login"}
             onClose={closeActiveModal}
             isLoading={isLoading}
             handleLogin={handleLogin}
+            setActiveModal={setActiveModal}
           />
           <EditProfileModal
             isModalOpen={activeModal === "edit-profile"}
