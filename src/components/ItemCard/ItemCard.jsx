@@ -23,7 +23,7 @@ function ItemCard({ item, onCardClicked, onCardLiked }) {
         <h2 className="card__name">{item.name}</h2>
         <button
           className={`card__like-btn ${isLiked ? itemLikeButtonClass : ""} ${
-            !currentUser._id ? hiddenLikeButtonClass : ""
+            !currentUser?._id ? hiddenLikeButtonClass : ""
           }`}
           onClick={handleLike}
         ></button>
