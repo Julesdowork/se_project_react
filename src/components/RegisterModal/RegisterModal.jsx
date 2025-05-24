@@ -29,6 +29,10 @@ function RegisterModal({
     handleRegistration(values, resetRegistrationForm);
   };
 
+  useEffect(() => {
+    resetRegistrationForm();
+  }, [isModalOpen]);
+
   return (
     <ModalWithForm
       name="register"

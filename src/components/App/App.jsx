@@ -63,9 +63,9 @@ function App() {
       .registerUser(name, avatarUrl, email, password)
       .then(() => {
         handleLogin({ email, password }, resetForm);
+        closeActiveModal();
       })
-      .catch(console.error)
-      .finally(closeActiveModal);
+      .catch(console.error);
   };
 
   const handleLogin = ({ email, password }, resetForm) => {
@@ -80,11 +80,11 @@ function App() {
           setToken(data.token);
           setCurrentUser(data.user);
           setIsLoggedIn(true);
+          closeActiveModal();
           resetForm();
         }
       })
-      .catch(console.error)
-      .finally(closeActiveModal);
+      .catch(console.error);
   };
 
   const handleLogout = () => {
@@ -94,34 +94,33 @@ function App() {
     setCurrentUser({});
   };
 
-  const handleAddItemModalSubmit = ({ name, imageUrl, weather }, resetForm) => {
+  const handleSubmit = (request) => {
     setIsLoading(true);
-    postItem({ name, imageUrl, weather }, getToken())
-      .then((data) => {
-        // pass in most recently updated state of clothingItems
-        setClothingItems((prevItems) => [data, ...prevItems]);
-        resetForm();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        closeActiveModal();
-      });
+    request()
+      .then(closeActiveModal)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }, resetForm) => {
+    const makeRequest = () => {
+      return postItem({ name, imageUrl, weather }, getToken()).then(
+        (newItem) => {
+          setClothingItems([newItem, ...clothingItems]);
+          resetForm();
+        }
+      );
+    };
+
+    handleSubmit(makeRequest);
   };
 
   const handleEditProfile = ({ name, avatar }) => {
-    setIsLoading(true);
-    editProfile({ name, avatar }, getToken())
-      .then((data) => {
-        setCurrentUser({ ...currentUser, name, avatar });
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-        closeActiveModal();
-      });
+    const makeRequest = () => {
+      return editProfile({ name, avatar }, getToken()).then(setCurrentUser);
+    };
+
+    handleSubmit(makeRequest);
   };
 
   const handleSignUpButton = () => {

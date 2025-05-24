@@ -42,24 +42,6 @@ function ModalWithForm({
           >
             {altBtnText}
           </button>
-          {/* {name === "register" && (
-            <button
-              type="button"
-              className="modal__alt-btn"
-              onClick={() => setActiveModal("login")}
-            >
-              or Log in
-            </button>
-          )}
-          {name === "login" && (
-            <button
-              type="button"
-              className="modal__alt-btn"
-              onClick={() => setActiveModal("register")}
-            >
-              or Register
-            </button>
-          )} */}
         </div>
       </form>
     </Modal>

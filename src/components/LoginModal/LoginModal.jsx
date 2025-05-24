@@ -23,6 +23,10 @@ function LoginModal({
     handleLogin(values, resetLoginForm);
   };
 
+  useEffect(() => {
+    resetLoginForm();
+  }, [isModalOpen]);
+
   return (
     <ModalWithForm
       name="login"
