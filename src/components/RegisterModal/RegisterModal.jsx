@@ -39,7 +39,8 @@ function RegisterModal({
       buttonText={isLoading ? "Registering..." : "Next"}
       onSubmit={handleSubmit}
       formValid={isValid}
-      setActiveModal={setActiveModal}
+      altBtnText={" or Log in"}
+      altBtnHandler={() => setActiveModal("login")}
     >
       <label
         htmlFor="register-email-input"

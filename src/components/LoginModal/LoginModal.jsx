@@ -33,7 +33,8 @@ function LoginModal({
       buttonText={isLoading ? "Logging in..." : "Log in"}
       onSubmit={handleSubmit}
       formValid={isValid}
-      setActiveModal={setActiveModal}
+      altBtnText={"or Sign up"}
+      altBtnHandler={() => setActiveModal("register")}
     >
       <label
         htmlFor="login-email-input"

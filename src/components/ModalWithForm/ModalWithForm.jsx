@@ -11,7 +11,8 @@ function ModalWithForm({
   buttonText,
   onSubmit,
   formValid,
-  setActiveModal,
+  altBtnText,
+  altBtnHandler,
 }) {
   return (
     <Modal
@@ -34,7 +35,14 @@ function ModalWithForm({
           >
             {buttonText}
           </button>
-          {name === "register" && (
+          <button
+            type="button"
+            className="modal__alt-btn"
+            onClick={altBtnHandler}
+          >
+            {altBtnText}
+          </button>
+          {/* {name === "register" && (
             <button
               type="button"
               className="modal__alt-btn"
@@ -51,7 +59,7 @@ function ModalWithForm({
             >
               or Register
             </button>
-          )}
+          )} */}
         </div>
       </form>
     </Modal>
