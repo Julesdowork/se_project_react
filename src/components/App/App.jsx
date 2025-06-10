@@ -75,14 +75,17 @@ function App() {
 
     auth
       .authorizeUser(email, password)
-      .then((data) => {
-        if (data.token) {
-          setToken(data.token);
-          setCurrentUser(data.user);
-          setIsLoggedIn(true);
-          closeActiveModal();
-          resetForm();
+      .then((res) => {
+        if (res.token) {
+          setToken(res.token);
+          return auth.checkToken(res.token);
         }
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+        resetForm();
       })
       .catch(console.error);
   };
